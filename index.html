@@ -3,444 +3,631 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PROMPT. | AIでLP制作を代行するパートナー</title>
+<title>MIRAI TAROT | LINEで届く、あなたのためのタロット鑑定</title>
+<meta name="description" content="友だち追加するだけで、プロ占い師によるタロット鑑定がLINEに届く。的中率92%*のMIRAI TAROTで、恋愛・仕事・これからの選択に答えを。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #ffffff;
-    --bg-alt: #f4f4f2;
-    --bg-dark: #111111;
-    --text: #111111;
-    --text-light: #6e6e6e;
-    --accent: #4338ca;
-    --accent-soft: #e3e0fb;
-    --on-dark: #f7f7f5;
-    --on-dark-soft: #a3a3a3;
-    --radius: 6px;
-    --maxw: 1280px;
+    --color-primary: #4A2E5C;
+    --color-primary-dark: #2D1B33;
+    --color-accent: #FF6FA5;
+    --color-accent-soft: #FFB3CC;
+    --gradient-main: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    --color-bg: #FFF9F5;
+    --color-bg-alt: #FFEEF3;
+    --color-bg-lavender: #F3EAFB;
+    --color-text: #2D1B33;
+    --color-text-light: #7A6A82;
+    --line-green: #06C755;
+    --font-heading: 'Shippori Mincho', serif;
+    --font-body: 'Zen Maru Gothic', sans-serif;
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
-    color: var(--text);
-    background: var(--bg);
-    line-height: 1.8;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
+
+  img { max-width: 100%; height: auto; display: block; }
+
+  .container { max-width: 1280px; margin: 0 auto; padding: 0 80px; }
+
+  section { padding: 100px 0; position: relative; overflow: hidden; }
+
+  h1, h2, h3 { font-family: var(--font-heading); color: var(--color-text); text-wrap: balance; }
 
   a { color: inherit; text-decoration: none; }
-  img, svg { max-width: 100%; display: block; }
-  ul { list-style: none; }
-
-  .container { max-width: var(--maxw); margin: 0 auto; padding: 0 80px; position: relative; }
-  section { padding: 120px 0; position: relative; overflow: hidden; }
-
-  h1, h2, h3 {
-    font-family: "Space Grotesk", "Noto Sans JP", sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-  }
-
-  .mono { font-family: "JetBrains Mono", monospace; }
-
-  /* ===== Section label ===== */
-  .section-number {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-  .section-number::before {
-    content: '';
-    width: 32px;
-    height: 1px;
-    background: var(--accent);
-  }
-  .section-number.on-dark { color: var(--accent); }
-
-  .section-head { max-width: 640px; margin-bottom: 64px; }
-  .section-head h2 { font-size: clamp(32px, 4.5vw, 54px); line-height: 1.2; margin-bottom: 20px; }
-  .section-head p { color: var(--text-light); font-size: 17px; }
-  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
-
-  .title-line { width: 64px; height: 3px; background: var(--accent); margin-top: 24px; border-radius: 2px; }
-  .center .title-line { margin-left: auto; margin-right: auto; }
 
   /* ===== Buttons ===== */
   .btn {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 18px 34px; border-radius: var(--radius);
-    font-weight: 700; font-size: 15px; letter-spacing: 0.01em;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    white-space: nowrap;
+    padding: 18px 32px; border-radius: 100px;
+    font-family: var(--font-body); font-weight: 700; font-size: 16px;
+    border: none; cursor: pointer; min-height: 48px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .btn svg { width: 18px; height: 18px; }
-  .btn-primary { background: var(--accent); color: var(--on-dark); }
-  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(67,56,202,0.3); }
-  .btn-outline { background: transparent; border: 1.5px solid var(--text); color: var(--text); }
-  .btn-outline:hover { background: var(--text); color: var(--bg); transform: translateY(-3px); }
-  .btn-light { background: var(--on-dark); color: var(--bg-dark); }
-  .btn-light:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,0.35); }
-  .btn-outline-light { border: 1.5px solid var(--on-dark-soft); color: var(--on-dark); }
-  .btn-outline-light:hover { background: var(--on-dark); color: var(--bg-dark); }
-  .cta-group { display: flex; gap: 18px; flex-wrap: wrap; }
+  .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+  .btn-primary {
+    background: var(--gradient-main); color: #fff;
+    box-shadow: 0 8px 30px rgba(74, 46, 92, 0.35);
+  }
+  .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(74, 46, 92, 0.45); }
+  .btn-outline {
+    background: transparent; color: var(--color-primary);
+    border: 1.5px solid var(--color-primary);
+  }
+  .btn-outline:hover { transform: translateY(-4px); background: rgba(74,46,92,0.06); }
+  .btn-light {
+    background: #fff; color: var(--color-primary);
+  }
+  .btn-light:hover { transform: translateY(-4px); box-shadow: 0 14px 40px rgba(0,0,0,0.25); }
 
-  /* ===== Decorative ===== */
-  .deco-circle {
+  .line-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--line-green); color: #fff;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+    padding: 6px 14px; border-radius: 100px;
+  }
+
+  /* ===== Section decoration utilities ===== */
+  .section-number {
+    display: inline-flex; align-items: center;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.3em;
+    color: var(--color-accent); margin-bottom: 20px;
+    padding-left: 48px; position: relative;
+  }
+  .section-number::before {
+    content: ''; position: absolute; left: 0; top: 50%;
+    width: 32px; height: 1px; background: var(--color-accent);
+  }
+  .section-dark .section-number { color: var(--color-accent-soft); }
+
+  .title-line { text-align: center; }
+  .title-line::after {
+    content: '';
+    display: block; width: 64px; height: 4px;
+    background: var(--gradient-main);
+    margin: 20px auto 0; border-radius: 2px;
+  }
+
+  .decoration-circle {
     position: absolute; border-radius: 50%;
-    background: radial-gradient(circle, rgba(67,56,202,0.14) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,111,165,0.25) 0%, transparent 65%);
     pointer-events: none; z-index: 0;
   }
-  .deco-ring {
+
+  .ring {
     position: absolute; border-radius: 50%;
-    border: 1px solid rgba(17,17,17,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
     pointer-events: none; z-index: 0;
   }
-  .deco-ring.on-dark { border-color: rgba(247,247,245,0.1); }
+
   .dot-pattern {
-    position: absolute;
-    background-image: radial-gradient(circle, rgba(17,17,17,0.14) 1.5px, transparent 1.5px);
-    background-size: 22px 22px;
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(74,46,92,0.08) 1.5px, transparent 1.5px);
+    background-size: 26px 26px;
     pointer-events: none; z-index: 0;
   }
+
+  .sparkle { position: absolute; color: var(--color-accent-soft); pointer-events: none; user-select: none; }
 
   /* ===== Header ===== */
-  header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease;
+  .site-header {
+    position: absolute; top: 0; left: 0; right: 0; z-index: 10;
+    padding: 28px 0;
   }
-  header.scrolled { border-color: rgba(17,17,17,0.08); }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 84px; }
-  .logo { display: flex; align-items: center; gap: 10px; font-family: "Space Grotesk", sans-serif; font-weight: 700; font-size: 1.15rem; }
-  .logo svg { width: 36px; height: 36px; }
-  .nav .btn { padding: 12px 24px; font-size: 14px; }
+  .site-header .container { display: flex; align-items: center; justify-content: space-between; }
+  .header-logo { display: flex; align-items: center; gap: 10px; }
+  .header-logo span { font-family: var(--font-heading); font-weight: 700; font-size: 20px; color: #fff; letter-spacing: 0.02em; }
 
   /* ===== Hero ===== */
-  .hero { min-height: 100vh; display: flex; align-items: center; padding-top: 84px; }
-  .hero-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
-  .hero-label {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 13px; font-weight: 700; letter-spacing: 0.1em;
-    color: var(--accent); margin-bottom: 28px;
-    opacity: 0; animation: heroFadeIn 0.7s ease-out 0.1s both;
+  .hero {
+    background: linear-gradient(160deg, var(--color-primary-dark) 0%, var(--color-primary) 55%, #6B3F73 100%);
+    padding: 180px 0 120px;
+    color: #fff;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center;
+    position: relative; z-index: 2;
+  }
+  .hero-badge {
+    display: inline-block; font-size: 13px; font-weight: 700; letter-spacing: 0.15em;
+    color: var(--color-accent-soft); background: rgba(255,255,255,0.08);
+    padding: 8px 18px; border-radius: 100px; margin-bottom: 28px;
+    animation: heroFadeIn 0.7s ease-out 0.1s both;
   }
   .hero-title {
-    font-size: clamp(32px, 4.4vw, 56px);
-    line-height: 1.15;
-    letter-spacing: -0.03em;
-    margin-bottom: 28px;
-    opacity: 0; animation: heroFadeIn 0.7s ease-out 0.3s both;
+    font-size: clamp(40px, 4.6vw, 64px); font-weight: 800; line-height: 1.2;
+    letter-spacing: -0.01em; margin-bottom: 28px; white-space: nowrap;
+    animation: heroFadeIn 0.7s ease-out 0.3s both;
   }
-  .hero-title .accent-word { color: var(--accent); }
+  .hero-title em { font-style: normal; color: var(--color-accent-soft); }
   .hero-sub {
-    font-size: clamp(16px, 1.3vw, 19px);
-    color: var(--text-light);
-    max-width: 460px; margin-bottom: 40px; line-height: 1.9;
-    opacity: 0; animation: heroFadeIn 0.7s ease-out 0.5s both;
+    font-size: clamp(16px, 1.5vw, 19px); line-height: 1.8; color: rgba(255,255,255,0.82);
+    max-width: 480px; margin-bottom: 40px;
+    animation: heroFadeIn 0.7s ease-out 0.5s both;
   }
-  .hero-cta-wrap { opacity: 0; animation: heroFadeIn 0.7s ease-out 0.7s both; }
-  .hero-stats { display: flex; gap: 32px; margin-top: 40px; flex-wrap: wrap; }
-  .hero-stat-num { font-family: "Space Grotesk", sans-serif; font-size: 26px; font-weight: 700; color: var(--text); }
-  .hero-stat-label { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+  .hero-cta-group {
+    display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 48px;
+    animation: heroFadeIn 0.7s ease-out 0.7s both;
+  }
+  .trust-bar {
+    display: flex; gap: 40px; flex-wrap: wrap;
+    animation: heroFadeIn 0.7s ease-out 0.9s both;
+  }
+  .trust-item .trust-num { font-family: var(--font-heading); font-size: 34px; font-weight: 700; color: #fff; line-height: 1; }
+  .trust-item .trust-label { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 6px; }
 
   @keyframes heroFadeIn {
     from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Terminal -> Browser mockup */
-  .hero-visual { position: relative; height: 520px; opacity: 0; animation: heroFadeIn 0.9s ease-out 0.4s both; }
-  .mock-window {
-    position: absolute; left: 0; border-radius: 14px; overflow: hidden;
-    box-shadow: 0 24px 60px rgba(17,17,17,0.16);
-    background: #1a1a1a;
+  /* Hero tarot card visual */
+  .hero-visual { position: relative; z-index: 2; display: flex; justify-content: center; align-items: center; min-height: 460px; }
+  .tarot-card {
+    width: 260px; height: 400px; border-radius: 20px;
+    background: linear-gradient(160deg, #6B3F73, #4A2E5C);
+    border: 2px solid rgba(255,255,255,0.25);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    padding: 28px 20px; position: relative;
+    animation: heroFadeIn 0.9s ease-out 0.6s both;
   }
-  .mock-terminal { width: 82%; top: 0; }
-  .mock-bar { display: flex; gap: 7px; padding: 14px 16px; background: #262626; }
-  .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
-  .mock-dot:nth-child(1) { background: #ff5f57; }
-  .mock-dot:nth-child(2) { background: #febc2e; }
-  .mock-dot:nth-child(3) { background: #28c840; }
-  .mock-body { padding: 22px 20px; font-family: "JetBrains Mono", monospace; font-size: 13px; color: #d4d4d4; line-height: 2; }
-  .mock-prompt-line { color: var(--on-dark-soft); }
-  .mock-caret { color: #7c7ce8; }
-  .mock-cursor {
-    display: inline-block; width: 7px; height: 14px; background: #7c7ce8; vertical-align: middle;
-    animation: blink 1.1s step-end infinite;
+  .tarot-card--back {
+    position: absolute; transform: rotate(-14deg) translateX(-90px);
+    opacity: 0.55; z-index: 1;
+    animation: heroFadeIn 0.9s ease-out 0.4s both;
   }
-  @keyframes blink { 50% { opacity: 0; } }
+  .tarot-card--front { transform: rotate(6deg); z-index: 2; }
+  .tarot-card .tarot-roman { font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.2em; color: var(--color-accent-soft); }
+  .tarot-card .tarot-icon { color: #fff; }
+  .tarot-card .tarot-name { font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 0.15em; }
 
-  .mock-browser {
-    width: 68%; bottom: 0; right: 0; left: auto; background: var(--bg);
-    border: 1px solid rgba(17,17,17,0.08);
-  }
-  .mock-browser .mock-bar { background: var(--bg-alt); }
-  .mock-browser .mock-bar .mock-dot { background: rgba(17,17,17,0.15); }
-  .mock-page { padding: 20px; }
-  .mock-page-line { height: 10px; border-radius: 4px; background: rgba(17,17,17,0.08); margin-bottom: 10px; }
-  .mock-page-line.w60 { width: 60%; height: 18px; background: var(--text); opacity: 0.85; }
-  .mock-page-line.w40 { width: 40%; }
-  .mock-page-line.w80 { width: 80%; }
-  .mock-page-btn { width: 120px; height: 34px; border-radius: 6px; background: var(--accent); margin-top: 16px; }
+  /* ===== Generic section grid utilities ===== */
+  .section-header { max-width: 640px; margin: 0 auto 64px; text-align: center; }
+  .section-header h2 { font-size: clamp(32px, 4.5vw, 52px); font-weight: 700; line-height: 1.3; }
+  .section-header p { margin-top: 20px; font-size: 17px; color: var(--color-text-light); }
 
-  .connector-arrow {
-    position: absolute; left: 76%; top: 46%; width: 60px; height: 60px;
-    color: var(--accent);
-  }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
 
-  /* ===== Pain points ===== */
-  .bg-alt { background: var(--bg-alt); }
-  .pain-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; position: relative; z-index: 1; }
-  .pain-card {
-    background: var(--bg); border-radius: 16px; padding: 40px;
-    display: flex; gap: 22px; align-items: flex-start;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  /* ===== Problems ===== */
+  .section-bg-white { background: var(--color-bg); }
+  .problem-card {
+    background: #fff; border-radius: 20px; padding: 36px 28px;
+    box-shadow: 0 4px 20px rgba(74,46,92,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .pain-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(17,17,17,0.08); }
-  .pain-icon {
-    flex-shrink: 0; width: 52px; height: 52px; border-radius: 12px;
-    background: var(--accent-soft); color: var(--accent);
-    display: flex; align-items: center; justify-content: center;
-  }
-  .pain-icon svg { width: 26px; height: 26px; }
-  .pain-card h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; letter-spacing: 0; font-family: "Noto Sans JP"; }
-  .pain-card p { font-size: 15px; color: var(--text-light); }
-
-  /* ===== Features ===== */
-  .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; position: relative; z-index: 1; }
-  .feature-card {
-    padding: 44px 40px; border: 1px solid rgba(17,17,17,0.1); border-radius: 18px;
-    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
-  }
-  .feature-card:hover { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(17,17,17,0.1); border-color: transparent; }
-  .feature-num { font-family: "JetBrains Mono", monospace; font-size: 13px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 18px; }
-  .feature-icon {
-    width: 56px; height: 56px; border-radius: 14px; background: var(--text); color: var(--bg);
-    display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
-  }
-  .feature-icon svg { width: 28px; height: 28px; }
-  .feature-card h3 { font-size: 21px; margin-bottom: 12px; }
-  .feature-card p { font-size: 15.5px; color: var(--text-light); }
-
-  /* ===== Process ===== */
-  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; z-index: 1; }
-  .process-card { text-align: left; position: relative; padding-top: 8px; }
-  .process-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-    background: rgba(17,17,17,0.1);
-  }
-  .process-card.active::before { background: var(--accent); }
-  .process-en { font-family: "JetBrains Mono", monospace; font-size: 12px; letter-spacing: 0.15em; color: var(--accent); margin: 20px 0 10px; }
-  .process-icon {
-    width: 48px; height: 48px; border-radius: 12px; background: var(--bg);
-    border: 1px solid rgba(17,17,17,0.1); color: var(--accent);
+  .problem-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(74,46,92,0.14); }
+  .problem-icon {
+    width: 52px; height: 52px; border-radius: 16px;
+    background: var(--color-bg-alt); color: var(--color-accent);
     display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
   }
-  .process-icon svg { width: 24px; height: 24px; }
-  .process-card h3 { font-size: 19px; margin-bottom: 10px; }
-  .process-card p { font-size: 14.5px; color: var(--text-light); }
+  .problem-card p { font-size: 15.5px; color: var(--color-text); }
 
-  /* ===== Works (dark) ===== */
-  .section-dark { background: var(--bg-dark); color: var(--on-dark); }
-  .works-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; position: relative; z-index: 1; }
-  .work-card {
-    background: #1a1a1a; border-radius: 18px; padding: 32px; border: 1px solid rgba(247,247,245,0.08);
-    display: block; transition: transform 0.25s ease, border-color 0.25s ease;
+  /* ===== Features ===== */
+  .section-bg-alt { background: var(--color-bg-alt); }
+  .feature-card {
+    background: #fff; border-radius: 20px; padding: 40px 32px;
+    box-shadow: 0 4px 24px rgba(74,46,92,0.07);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .work-card:hover { transform: translateY(-6px); border-color: rgba(247,247,245,0.2); }
-  .work-link-row { display: flex; align-items: center; gap: 6px; margin-top: 16px; font-family: "JetBrains Mono", monospace; font-size: 12.5px; color: var(--accent); }
-  .work-link-row svg { width: 14px; height: 14px; }
-  .work-badge {
-    display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700;
-    letter-spacing: 0.1em; background: var(--accent); color: var(--on-dark);
-    padding: 5px 12px; border-radius: 999px; margin-bottom: 20px; width: fit-content;
+  .feature-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(74,46,92,0.15); }
+  .feature-icon {
+    width: 60px; height: 60px; border-radius: 18px;
+    background: var(--gradient-main); color: #fff;
+    display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
   }
-  .work-mock {
-    border-radius: 12px; overflow: hidden; margin-bottom: 24px;
-    border: 1px solid rgba(247,247,245,0.08);
+  .feature-card h3 { font-size: 21px; font-weight: 700; margin-bottom: 12px; }
+  .feature-card p { font-size: 15px; color: var(--color-text-light); }
+  .feature-note { font-size: 12px; color: var(--color-text-light); margin-top: 6px; }
+
+  /* ===== Flow ===== */
+  .flow-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
+  .flow-step { text-align: center; position: relative; padding: 0 12px; }
+  .flow-step-num {
+    width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 24px;
+    background: var(--gradient-main); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-heading); font-size: 24px; font-weight: 700;
+    box-shadow: 0 10px 30px rgba(255,111,165,0.35);
   }
-  .work-mock .mock-bar { background: rgba(0,0,0,0.3); }
-  .work-mock-body {
-    height: 160px; position: relative;
-    background: linear-gradient(155deg, var(--mock-a, #faf8f3), var(--mock-b, #ded3c2));
+  .flow-step h3 { font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+  .flow-step p { font-size: 14.5px; color: var(--color-text-light); }
+
+  /* ===== Stats ===== */
+  .section-dark {
+    background: linear-gradient(160deg, var(--color-primary-dark), var(--color-primary));
+    color: #fff;
   }
-  .work-mock-body::after {
-    content: ''; position: absolute; bottom: 20px; left: 20px; width: 60%; height: 10px; border-radius: 4px; background: rgba(0,0,0,0.32);
+  .section-dark .section-header p { color: rgba(255,255,255,0.7); }
+  .stat-item { text-align: center; }
+  .stat-icon { color: var(--color-accent-soft); margin: 0 auto 18px; width: 40px; height: 40px; }
+  .stat-num { font-family: var(--font-heading); font-size: clamp(44px, 5vw, 68px); font-weight: 700; line-height: 1; }
+  .stat-label { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 12px; letter-spacing: 0.05em; }
+  .stat-asterisk { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-top: 40px; }
+
+  /* ===== Testimonials ===== */
+  .testimonial-card {
+    background: #fff; border-radius: 20px; padding: 32px 28px;
+    box-shadow: 0 4px 20px rgba(74,46,92,0.07);
   }
-  .work-mock-body::before {
-    content: ''; position: absolute; bottom: 40px; left: 20px; width: 80%; height: 16px; border-radius: 4px; background: rgba(0,0,0,0.45);
-  }
-  .work-card h3 { color: var(--on-dark); font-size: 22px; margin-bottom: 10px; }
-  .work-card p { color: var(--on-dark-soft); font-size: 14.5px; margin-bottom: 8px; }
-  .work-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
-  .work-tag { font-family: "JetBrains Mono", monospace; font-size: 11px; color: var(--on-dark-soft); border: 1px solid rgba(247,247,245,0.15); padding: 4px 10px; border-radius: 999px; }
+  .testimonial-quote { color: var(--color-accent); font-size: 32px; font-family: var(--font-heading); line-height: 0.5; }
+  .testimonial-text { font-size: 15px; margin: 16px 0 24px; color: var(--color-text); }
+  .testimonial-person { display: flex; align-items: center; gap: 14px; }
+  .testimonial-person img { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; }
+  .testimonial-name { font-size: 14.5px; font-weight: 700; }
+  .testimonial-role { font-size: 12.5px; color: var(--color-text-light); }
 
   /* ===== Pricing ===== */
-  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: stretch; position: relative; z-index: 1; }
-  .price-card {
-    background: var(--bg); border: 1px solid rgba(17,17,17,0.1); border-radius: 20px;
-    padding: 44px 36px; display: flex; flex-direction: column;
+  .pricing-card {
+    background: #fff; border-radius: 24px; padding: 40px 32px;
+    box-shadow: 0 4px 20px rgba(74,46,92,0.07);
+    display: flex; flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .price-card.featured {
-    background: var(--text); color: var(--bg); border-color: var(--text);
-    transform: scale(1.04); box-shadow: 0 30px 60px rgba(17,17,17,0.22);
+  .pricing-card:hover { transform: translateY(-6px); }
+  .pricing-card--featured {
+    background: linear-gradient(160deg, var(--color-primary-dark), var(--color-primary));
+    color: #fff; transform: scale(1.05);
+    box-shadow: 0 24px 60px rgba(74,46,92,0.35);
   }
-  .price-badge {
-    display: inline-block; font-family: "JetBrains Mono", monospace; font-size: 11px; font-weight: 700;
-    letter-spacing: 0.1em; background: var(--accent); color: var(--on-dark);
-    padding: 6px 14px; border-radius: 999px; margin-bottom: 20px; width: fit-content;
+  .pricing-card--featured:hover { transform: scale(1.05) translateY(-6px); }
+  .pricing-badge {
+    align-self: flex-start; background: var(--color-accent); color: #fff;
+    font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 100px; margin-bottom: 16px;
   }
-  .price-card h3 { font-size: 21px; margin-bottom: 6px; }
-  .price-card .price-range { font-family: "Space Grotesk", sans-serif; font-size: 26px; font-weight: 700; margin-bottom: 28px; }
-  .price-card.featured .price-range { color: var(--bg); }
-  .price-feats { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; flex-grow: 1; }
-  .price-feats li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; }
-  .price-feats svg { width: 18px; height: 18px; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
-  .price-card .btn { justify-content: center; width: 100%; }
-
-  /* ===== Final CTA ===== */
-  .final-cta {
-    background: var(--bg-dark); color: var(--on-dark); border-radius: 28px;
-    padding: 90px 64px; text-align: center; position: relative; overflow: hidden;
-  }
-  .final-cta h2 { font-size: clamp(30px, 4.4vw, 54px); color: var(--on-dark); margin-bottom: 20px; }
-  .final-cta p { color: var(--on-dark-soft); font-size: 17px; margin-bottom: 44px; }
-  .final-cta .cta-group { justify-content: center; position: relative; z-index: 1; }
+  .pricing-name { font-size: 20px; font-weight: 700; margin-bottom: 8px; font-family: var(--font-heading); }
+  .pricing-price { font-size: 38px; font-weight: 700; font-family: var(--font-heading); margin-bottom: 4px; }
+  .pricing-price span { font-size: 14px; font-weight: 400; font-family: var(--font-body); }
+  .pricing-desc { font-size: 13.5px; color: var(--color-text-light); margin-bottom: 28px; }
+  .pricing-card--featured .pricing-desc { color: rgba(255,255,255,0.65); }
+  .pricing-features { list-style: none; margin-bottom: 32px; flex-grow: 1; }
+  .pricing-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; margin-bottom: 14px; }
+  .pricing-features svg { flex-shrink: 0; margin-top: 2px; color: var(--color-accent); }
+  .pricing-card--featured .pricing-features svg { color: var(--color-accent-soft); }
 
   /* ===== FAQ ===== */
-  .faq-list { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-  .faq-item { border-bottom: 1px solid rgba(17,17,17,0.12); padding: 28px 0; }
-  .faq-item summary {
-    cursor: pointer; font-size: 17px; font-weight: 700;
-    display: flex; justify-content: space-between; align-items: center; list-style: none; gap: 20px;
+  .faq-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+  .faq-item {
+    background: #fff; border-radius: 16px; padding: 28px;
+    box-shadow: 0 3px 14px rgba(74,46,92,0.06);
   }
-  .faq-item summary::-webkit-details-marker { display: none; }
-  .faq-icon {
-    width: 24px; height: 24px; flex-shrink: 0; border-radius: 50%;
-    border: 1.5px solid var(--accent); color: var(--accent);
-    display: flex; align-items: center; justify-content: center; transition: transform 0.25s ease;
+  .faq-question {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-weight: 700; font-size: 16px; margin-bottom: 14px;
   }
-  .faq-item[open] .faq-icon { transform: rotate(45deg); }
-  .faq-item p { margin-top: 16px; color: var(--text-light); font-size: 15px; max-width: 680px; }
+  .faq-answer {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 14.5px; color: var(--color-text-light);
+  }
+  .faq-badge {
+    flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-heading); font-weight: 700; font-size: 14px;
+  }
+  .faq-question .faq-badge { background: var(--gradient-main); color: #fff; }
+  .faq-answer .faq-badge { background: var(--color-bg-alt); color: var(--color-accent); }
+
+  /* ===== Final CTA ===== */
+  .final-cta { text-align: center; }
+  .final-cta h2 { font-size: clamp(34px, 4.8vw, 56px); font-weight: 700; color: #fff; margin-bottom: 20px; }
+  .final-cta p { font-size: 17px; color: rgba(255,255,255,0.75); max-width: 520px; margin: 0 auto 40px; }
+  .final-cta .hero-cta-group { justify-content: center; margin-bottom: 32px; }
 
   /* ===== Footer ===== */
-  footer { padding: 64px 0 40px; }
-  .footer-top {
-    display: flex; justify-content: space-between; align-items: center;
-    padding-bottom: 40px; margin-bottom: 32px; border-bottom: 1px solid rgba(17,17,17,0.1);
-  }
-  .footer-links { display: flex; gap: 32px; font-size: 14px; color: var(--text-light); }
-  .footer-bottom { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-light); flex-wrap: wrap; gap: 12px; }
+  footer { background: var(--color-primary-dark); color: rgba(255,255,255,0.6); padding: 56px 0 32px; }
+  .footer-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; flex-wrap: wrap; gap: 24px; }
+  .footer-logo { display: flex; align-items: center; gap: 10px; }
+  .footer-logo span { font-family: var(--font-heading); font-weight: 700; font-size: 18px; color: #fff; }
+  .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+  .footer-links a { font-size: 13.5px; }
+  .footer-links a:hover { color: #fff; }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; font-size: 12.5px; }
 
   /* ===== Responsive ===== */
   @media (max-width: 768px) {
     .container { padding: 0 20px; }
     section { padding: 64px 0; }
-    .hero { padding-top: 84px; }
 
-    h1 { font-size: clamp(32px, 9vw, 42px) !important; }
+    h1 { font-size: clamp(34px, 9vw, 44px) !important; }
     h2 { font-size: clamp(26px, 7vw, 34px) !important; }
     h3 { font-size: 19px !important; }
 
-    .hero-grid { grid-template-columns: 1fr !important; gap: 44px !important; }
-    .hero-visual { height: 320px; order: -1; }
-    .hero-title { font-size: clamp(32px, 9vw, 44px); }
-    .mock-terminal { width: 88%; }
-    .mock-browser { width: 74%; }
-    .connector-arrow { display: none; }
-
-    .pain-grid, .feature-grid, .pricing-grid { grid-template-columns: 1fr !important; }
-    .process-grid { grid-template-columns: 1fr 1fr !important; gap: 32px 20px !important; }
-    .works-grid { grid-template-columns: 1fr !important; }
-
-    .price-card.featured { transform: none; }
-
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr !important; }
+    .hero-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+    .hero { padding: 140px 0 72px; }
+    .hero-visual { min-height: 340px; }
+    .hero-cta-group, .final-cta .hero-cta-group { flex-direction: column; align-items: stretch; }
     .btn { width: 100%; justify-content: center; min-height: 48px; }
-    .cta-group { flex-direction: column; }
-    .cta-group .btn { width: 100%; }
-    .nav .btn { width: auto; padding: 10px 18px; }
+    .trust-bar { gap: 28px; }
 
-    .final-cta { padding: 56px 24px; border-radius: 20px; }
-    .footer-top { flex-direction: column; align-items: flex-start; gap: 24px; }
-    .footer-bottom { flex-direction: column; }
+    .flow-steps { grid-template-columns: 1fr !important; }
+    .pricing-card--featured { transform: none; }
+    .pricing-card--featured:hover { transform: translateY(-6px); }
 
-    img { max-width: 100%; height: auto; }
+    .tarot-card--back { display: none; }
+    .tarot-card--front { width: 220px; height: 340px; }
+
+    .faq-question { font-size: 15px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
   }
 </style>
 </head>
 <body>
 
-<header id="header">
-  <div class="container nav">
-    <div class="logo">
-      <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="var(--accent)"/><text x="20" y="27" text-anchor="middle" fill="var(--on-dark)" font-size="18" font-weight="700" font-family="Space Grotesk, sans-serif">P.</text></svg>
-      PROMPT.
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-logo">
+      <svg width="40" height="40" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="logoGradHeader" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FFB3CC"/>
+            <stop offset="1" stop-color="#FF6FA5"/>
+          </linearGradient>
+        </defs>
+        <circle cx="22" cy="22" r="22" fill="url(#logoGradHeader)"/>
+        <text x="22" y="28" text-anchor="middle" fill="#2D1B33" font-size="15" font-weight="700" font-family="'Shippori Mincho', serif">MT</text>
+      </svg>
+      <span>MIRAI TAROT</span>
     </div>
-    <a href="mailto:gdr.ryota338@gmail.com?subject=LP制作のご相談" class="btn btn-primary">無料相談を申し込む</a>
+    <span class="line-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+      LINE公式アカウント
+    </span>
   </div>
 </header>
 
 <!-- ===== Hero ===== -->
-<section class="hero" id="hero">
-  <div class="deco-circle" style="width:520px; height:520px; top:-160px; left:-160px;"></div>
-  <div class="deco-ring" style="width:300px; height:300px; bottom:-100px; left:38%;"></div>
+<section class="hero">
+  <div class="decoration-circle" style="width:560px; height:560px; top:-200px; right:-160px;"></div>
+  <div class="decoration-circle" style="width:400px; height:400px; bottom:-180px; left:-120px; background: radial-gradient(circle, rgba(255,179,204,0.18) 0%, transparent 65%);"></div>
+  <div class="ring" style="width:340px; height:340px; top:60px; right:80px;"></div>
+  <div class="ring" style="width:200px; height:200px; top:140px; right:160px;"></div>
+  <div class="sparkle" style="top:14%; left:6%; font-size:22px;">✦</div>
+  <div class="sparkle" style="top:70%; left:10%; font-size:16px;">✧</div>
+  <div class="sparkle" style="top:22%; left:44%; font-size:14px;">✦</div>
+
   <div class="container">
     <div class="hero-grid">
-      <div>
-        <div class="hero-label mono">PROMPT. | AIでLP制作を代行するパートナー</div>
-        <h1 class="hero-title">はやく、ちゃんと、<br><span class="accent-word">伝わるLPを。</span></h1>
-        <p class="hero-sub">デザインの専門知識ではなく、AIを使いこなす力で。ヒアリングから公開まで、スピーディにLPを形にします。</p>
-        <div class="hero-cta-wrap">
-          <div class="cta-group">
-            <a href="mailto:gdr.ryota338@gmail.com?subject=LP制作のご相談" class="btn btn-primary">
-              無料相談を申し込む
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </a>
-            <a href="#works" class="btn btn-outline">制作事例を見る</a>
+      <div class="hero-content">
+        <span class="hero-badge">20代女性に選ばれるLINEタロット</span>
+        <h1 class="hero-title">答えのない夜に、<br><em>タロット</em>を。</h1>
+        <p class="hero-sub">LINE友だち追加するだけで、プロ占い師によるタロット鑑定がすぐに届く。恋愛、仕事、これからの選択に。</p>
+        <div class="hero-cta-group">
+          <a href="#" class="btn btn-primary" aria-label="LINE友だち追加をして無料相談を始める">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            無料でLINE友だち追加する
+          </a>
+          <a href="#episodes" class="btn btn-outline" style="color:#fff; border-color: rgba(255,255,255,0.4);" aria-label="的中エピソードを見る">
+            的中エピソードを見る
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="trust-bar">
+          <div class="trust-item">
+            <div class="trust-num">38,000<span style="font-size:18px;">件+</span></div>
+            <div class="trust-label">累計鑑定数*</div>
           </div>
-          <div class="hero-stats">
-            <div>
-              <div class="hero-stat-num">3日〜</div>
-              <div class="hero-stat-label">最短の初稿スピード</div>
-            </div>
-            <div>
-              <div class="hero-stat-num">無制限</div>
-              <div class="hero-stat-label">修正対応回数</div>
-            </div>
+          <div class="trust-item">
+            <div class="trust-num">92<span style="font-size:18px;">%</span></div>
+            <div class="trust-label">的中率*</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-num">15<span style="font-size:18px;">分</span></div>
+            <div class="trust-label">平均返信時間*</div>
           </div>
         </div>
       </div>
+
       <div class="hero-visual">
-        <div class="mock-window mock-terminal">
-          <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-          <div class="mock-body">
-            <div class="mock-prompt-line">$ start</div>
-            <div><span class="mock-caret">&gt;</span> LPをつくりたい<span class="mock-cursor"></span></div>
+        <div class="tarot-card tarot-card--back" aria-hidden="true">
+          <span class="tarot-roman">XVIII</span>
+          <svg class="tarot-icon" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M20 12.5A8 8 0 1 1 11.5 4A6.5 6.5 0 0 0 20 12.5Z"/></svg>
+          <span class="tarot-name">THE MOON</span>
+        </div>
+        <div class="tarot-card tarot-card--front">
+          <span class="tarot-roman">XVII</span>
+          <svg class="tarot-icon" width="72" height="72" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+          <span class="tarot-name">THE STAR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 課題提起 ===== -->
+<section class="section-bg-white" id="episodes">
+  <div class="dot-pattern" style="opacity:0.5;"></div>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="section-header">
+      <div class="section-number" style="justify-content:center; padding-left:0;">SECTION 01</div>
+      <h2>こんな迷い、<br class="mobile-only">ありませんか?</h2>
+    </div>
+    <div class="grid-4">
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4 9.5 4C11 4 12 5 12 5C12 5 13 4 14.5 4C17.5 4 20 6.5 20 9.5C20 14.5 12 21 12 21Z"/></svg>
+        </div>
+        <p>彼の気持ちがわからず、同じことをぐるぐる考えてしまう</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+        </div>
+        <p>転職・独立…この決断、今でいいのか自信が持てない</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <p>誰かに話したいけど、周りには相談しにくい</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+        </div>
+        <p>毎朝の運勢アプリじゃ物足りない、もっと深く視てほしい</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 特徴 ===== -->
+<section class="section-bg-alt">
+  <div class="decoration-circle" style="width:400px; height:400px; top:-140px; left:-140px; background: radial-gradient(circle, rgba(74,46,92,0.1) 0%, transparent 65%);"></div>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="section-header">
+      <div class="section-number" style="justify-content:center; padding-left:0;">SECTION 02</div>
+      <h2>MIRAI TAROTが<br class="mobile-only">選ばれる理由</h2>
+      <p>怪しさゼロ。丁寧なリーディングと、LINEならではの気軽さを両立しました。</p>
+    </div>
+    <div class="grid-4">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+        </div>
+        <h3>的中率92%</h3>
+        <p>経験豊富な占い師による精密なタロットリーディング。</p>
+        <p class="feature-note">*自社アンケート調べ</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3>LINEで完結</h3>
+        <p>アプリのダウンロード不要。友だち追加してすぐに相談できます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+        </div>
+        <h3>平均返信15分</h3>
+        <p>待たされないスピード鑑定。思い立ったその日に答えが届く。</p>
+        <p class="feature-note">*平均値・時間帯により変動</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <h3>秘密厳守</h3>
+        <p>トーク内容は占い師以外に共有されない、安心の相談環境。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== サービスの流れ ===== -->
+<section class="section-bg-white">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number" style="justify-content:center; padding-left:0;">SECTION 03</div>
+      <h2>使い方はかんたん3ステップ</h2>
+    </div>
+    <div class="flow-steps">
+      <div class="flow-step">
+        <div class="flow-step-num">1</div>
+        <h3>友だち追加</h3>
+        <p>ボタンをタップしてLINEを友だち追加(無料)</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">2</div>
+        <h3>メッセージを送る</h3>
+        <p>知りたいことをそのままLINEで送るだけ</p>
+      </div>
+      <div class="flow-step">
+        <div class="flow-step-num">3</div>
+        <h3>鑑定結果が届く</h3>
+        <p>プロ占い師によるタロット鑑定結果が届く</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 実績 ===== -->
+<section class="section-dark">
+  <div class="decoration-circle" style="width:500px; height:500px; bottom:-220px; right:-160px;"></div>
+  <div class="ring" style="width:260px; height:260px; top:40px; left:-60px;"></div>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="section-header">
+      <div class="section-number" style="justify-content:center; padding-left:0;">SECTION 04</div>
+      <h2 style="color:#fff;">数字で見るMIRAI TAROT</h2>
+    </div>
+    <div class="grid-3">
+      <div class="stat-item">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <div class="stat-num">38,000<span style="font-size:26px;">件+</span></div>
+        <div class="stat-label">累計鑑定数</div>
+      </div>
+      <div class="stat-item">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"/></svg>
+        <div class="stat-num">92<span style="font-size:26px;">%</span></div>
+        <div class="stat-label">的中率</div>
+      </div>
+      <div class="stat-item">
+        <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 21C12 21 4 14.5 4 9.5C4 6.5 6.5 4 9.5 4C11 4 12 5 12 5C12 5 13 4 14.5 4C17.5 4 20 6.5 20 9.5C20 14.5 12 21 12 21Z"/></svg>
+        <div class="stat-num">81<span style="font-size:26px;">%</span></div>
+        <div class="stat-label">リピート率</div>
+      </div>
+    </div>
+    <p class="stat-asterisk">*2025年度 自社データに基づく仮数値です</p>
+  </div>
+</section>
+
+<!-- ===== お客様の声 ===== -->
+<section class="section-bg-white">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-number" style="justify-content:center; padding-left:0;">SECTION 05</div>
+      <h2>利用者の声</h2>
+    </div>
+    <div class="grid-3">
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">彼の本音がわかって、自分から連絡する勇気が出ました。ずっと迷っていたことが嘘みたいにスッキリしました。</p>
+        <div class="testimonial-person">
+          <img src="data:image/jpeg;base64,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" alt="お客様の声 1" width="52" height="52" loading="lazy">
+          <div>
+            <div class="testimonial-name">M.Kさん</div>
+            <div class="testimonial-role">20代・会社員</div>
           </div>
         </div>
-        <svg class="connector-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16"/><path d="M14 6l6 6-6 6"/></svg>
-        <div class="mock-window mock-browser">
-          <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-          <div class="mock-page">
-            <div class="mock-page-line w60"></div>
-            <div class="mock-page-line w80"></div>
-            <div class="mock-page-line w40"></div>
-            <div class="mock-page-btn"></div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">転職の決断を後押ししてもらえました。的確なアドバイスで、自分の気持ちにも気づけた気がします。</p>
+        <div class="testimonial-person">
+          <img src="data:image/jpeg;base64,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" alt="お客様の声 2" width="52" height="52" loading="lazy">
+          <div>
+            <div class="testimonial-name">R.Sさん</div>
+            <div class="testimonial-role">20代・営業職</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-quote">"</div>
+        <p class="testimonial-text">LINEで気軽に相談できるのが本当にありがたいです。返信も早くて、隙間時間に相談できます。</p>
+        <div class="testimonial-person">
+          <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD//gA7Q1JFQVRPUjogZ2QtanBlZyB2MS4wICh1c2luZyBJSkcgSlBFRyB2ODApLCBxdWFsaXR5ID0gODAK/9sAQwAGBAUGBQQGBgUGBwcGCAoQCgoJCQoUDg8MEBcUGBgXFBYWGh0lHxobIxwWFiAsICMmJykqKRkfLTAtKDAlKCko/9sAQwEHBwcKCAoTCgoTKBoWGigoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgo/8AAEQgAaABoAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/aAAwDAQACEQMRAD8A98ZhjrTBjNSiMGnrCBW5iOiOcAA14x8Zfi2dFuJtD8NSL9tT5bm7GD5R7on+16nt9ene/FHxKfCfg27vbc4vZf3Fv7O3f8Bk18W6pK80rszlnclmY9Sf/wBdRKVtDSEb6i6jrd1qFzJcXc8sxY5LSOWZz6kmqX9pzK4YMd56e1QvFwBjgCm+Qclm44rJyNLF631u4ifAdjnrmun0rxKdyozlDnHBz+FcUYzHHvx87HCj3qS3ifesUYZmY446tz/U0Ko0PlPdfDHjU2DLJEoY/wB2MZL17p4K8Uwa/p4lVHilXho3GDXhXgnwKq6fG1/I32hxlgpxt9hXpvhfSDo0uy2kJhY8ZOCD7n/GiNS70HOlZanqySArQWWqlusgiXzMbsc09t1dFzlsSO60VAVYmipbKsKuBSs4ApNvtSlcjpVEngf7SmpNNd6RpisdqI87D1JO1T+hr5+uULXDADnOPyr2r49sZfHjjGfJs0X6dW/rXj2wtegL2+YfnXLOXvM64x91EUdqHcLjI649vT9KRoNwCgZaRvzH/wBckVcAKQ3DR/eZvJT68KP8afsCHcvOcomOyjqfxNZORoomRPF5l2iIQQvT8P8A6+a6v4f6Wkuqi7lXKQ42Ajvjj8hz+NYltAGLSOMrj8x/n+dekeGrK802wWX+zZJ8/Mdjrkk98VMm7WRdOKvdnpOksVRW6e1djo0odhkBu+D3rgdD1WO4hQCNo5OhjcYINalxrkumvGlvHF5vcyyBFUe/c/hRTqWdjWpTuj16PnAFTCLNZvh64mutJtbi6MfmSLuzFnaR2IzWwjDFegtjymrOw1YQKKl3iigDPZ1AqLzcnFOMbEULb880ak6HzN8Zd0nj3VWz0ijA/wC+RXlsa7buQ/3Iyf54/nXrPxnjMXjfVePvQxkf98//AFq8omBEtz6ttT9AP61wSfvM9CK91DQCEgA6jL/Vjwv881JN/q9o4ziNPoOppR/y0MfzFcIo9W6D/PvUku23cOSCsQ2p/tv1z+fJ/D1qGykgkSQJ5NmgedRuIPTd2B+lamiaXrc7iW6vLlTjsy4U9sDnIpnhcZlZ35dzkk+n+f516jp9vG9uNuAcUozcWb+x5ldnNW1/c2+rRybi7ooVzzgkfX+tbGu+Hb7WtZjvrS7ulguQHCRStEAe43Kcjn26VnalGI71ooVG4DLEnGBXbeA72FrKS1dxKgOUI52n2NOnKzuVUp3jZnq/hjTG0fQrOza7luhFGqq8mM4A4HArXVveqOknfpsJ54GKuIh9K702zyJK0mibzAOpoqN4S1FO7JJwVx2o3Cs2CctVtSSKvmuZ2sfOvx5i2+L53H8dqv5/NXj91xPMw67hj6gD/wCtXt/x9gP9vwSY4eEL+RP+NeI3ALXcqjqZMfjx/SvOqfGz06esEWtItfNkjUfeyZCT2HQH9P0rMkf+0L8pDkwoxRPcd2rcmlFhoF/IjYlKCPfjJA+7/UmsrQdltASo5CHr1JJH9M/lWbfU0iuhseGVJnb/AHiP1r0vTZAkQzz2ArzHwxMEm256GvQ7OYeWDwazludcH7pLqE9hBMWvZIlbPc8j+tdZ4Z1fSpbVbe2BKsw5VOA3A5Irk2sYbybeYl3uckgYJrs9CjOlWd1PdNi0hhMjHjhVGT/Krp2Jny8t3ueraLbeVpdurfeK7vz5q+EUdq57wdrJ1Xwvp14xG+SIB8f3hwf1BrZ84tXqRasrHhzvzO5cBUUVAjZFFFwKUUKoatpjFY8t4RTUvj70uaKJszzL4/2mVtLkDIUEZ/UfyrwWNM6mXx8savKfqBx/MV9LfFWA6j4ZmKjLRDf+X+TXzosYS2ubg8ZRUz6ckt/6CK4a3x3XU7qDvCxiahKZbJrQEkNIqt+BB/xpNIBnPTCyyBVHsBkn/wAexUMULTJNglQG2g+pbqfwrQ0goJi8YxDEBDF/tE8s1Zy2OiJbi02W3Yywk8nNdDpVzdthBGSa2tEsI7uEKwHNdHpGjfZpyAqkdqhXZo7LY5x/EVnoV7FBrM8dpMyCVUlYZKkkA/oas+MPG8E2i3OlWRaSe7jUlsYVUJ6g984x+NeQ/HOSSX4k6gkmcRRwxoPby1P8yapeGrmQ6ksc8ryMVVcuxYjGCBz7AVvycsbowVVylZn1j8Bb03vhB7dmy1vJx9GGf5hq9NVQK8Y/Z9cw/wBoW4PADZH+6+B/OvZkyetdFF3gjlrq02TqwAopNlFbGBn/AGND15pVs0/u1YAFPXrVctyblC80yOe3eNkBVhgg96+Wvilox8L3LaaCds85eLJ/5Z8Hn6c19Z3t3FZ2clxcMEijG5jXyp8bdaj13xULqCNxDGiwxq4wfUnH41hiIJRvY3w0rz5TgJnS30pnYlN/Ax949enuaq/2mlnqdjabQqCMEj0J4Az+H61FeyGWSBSc/MTj1Of/AKwrG8QRk38mCdyAFT6jAxXLGN3qdkpWWh7z4anGI2U8GvRrEK6K49Oa8N+EmvLqQXTbogXcY+Qk/fH+Ne3aQDG/lP36VCTi7MttSV0fPvxstFX4j3Mzjg20cmPXAx/7LXKeEE8zXIzJ0Q72r2T43+G3vbu11KCMsVjMEu0ZIGcqf1NePWUUmnSTFwVkJx+H/wCutZP3WjJRtJM+jfgbqEEPiR7WRwJLxZfLGeuGBNe+KoU18T+Gtak0fX9I1WJjnT5V87H9x/vH8K+x7W8F1DHLGwKSKGUj0NaYZ2jZmOKV5cyNXNFRRgkUV13OUyVvCRwKdJerBBJPOyxxRqXd26KByTRRSg25JES0TZ59448a2lzp5tbcuInP7xnTG4dQAPr3r548UagtwxZRkqzN9Sx6fyoorvzKlGlBQjtqceVVpVpSqS30RyEsojYhjmaQ+WPYHr/hUOuL+7srns6GNvwPH9aKK8OK2Pdk9yDSLqbT9QhurZik0TBlI9RX1H4Q1xfEOi219AoEhG2QA8q46iiinJahF6Grq8LX9uyNG2SMNj+dedeMfAclzpsmpQK0lxbp86Kn3kz1+o5ooo5UyuZo8xtoZdI1QpeqZLScsrt/ssef1wfwr6o+C+sfbfCq2Vw/mXenEQMx/jjxlG/Ff1Boopw0qGdRXpnpEVxnjFFFFdVzkP/Z" alt="お客様の声 3" width="52" height="52" loading="lazy">
+          <div>
+            <div class="testimonial-name">A.Yさん</div>
+            <div class="testimonial-role">20代・学生</div>
           </div>
         </div>
       </div>
@@ -448,381 +635,141 @@
   </div>
 </section>
 
-<!-- ===== 02: 課題提起 ===== -->
-<section class="bg-alt" id="problem">
-  <div class="dot-pattern" style="width:320px; height:320px; top:40px; right:-80px;"></div>
-  <div class="container">
-    <div class="section-head">
-      <div class="section-number">SECTION_02</div>
-      <h2>こんなお悩み、ありませんか?</h2>
+<!-- ===== 料金 ===== -->
+<section class="section-bg-alt">
+  <div class="dot-pattern" style="opacity:0.5;"></div>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="section-header">
+      <div class="section-number" style="justify-content:center; padding-left:0;">SECTION 06</div>
+      <h2>あなたに合ったプランを</h2>
+      <p>まずは無料で試してから、自分に合うプランを選べます。</p>
     </div>
-    <div class="pain-grid">
-      <div class="pain-card">
-        <div class="pain-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><circle cx="16.5" cy="14" r="1" fill="currentColor" stroke="none"/></svg>
-        </div>
-        <div>
-          <h3>LPが欲しいけれど、制作会社に頼む予算が厳しい</h3>
-          <p>本格的な制作会社に頼むと数十万円〜。まずは形にしたいだけなのに、と感じている。</p>
-        </div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
-        </div>
-        <div>
-          <h3>発注しても納期が数週間〜1ヶ月かかってしまう</h3>
-          <p>できるだけ早く公開したいのに、通常の制作フローでは待たされることが多い。</p>
-        </div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H4z"/><path d="M9 20h6"/><path d="M4 12h16"/></svg>
-        </div>
-        <div>
-          <h3>ノーコードツールで自作してみたが、質が伴わない</h3>
-          <p>テンプレートに当てはめただけになってしまい、狙った印象に届かない。</p>
-        </div>
-      </div>
-      <div class="pain-card">
-        <div class="pain-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="13"/><circle cx="12" cy="16.5" r="0.6" fill="currentColor" stroke="none"/></svg>
-        </div>
-        <div>
-          <h3>追加料金や修正対応への不安から発注に踏み切れない</h3>
-          <p>「言った以上に費用がかかるのでは」という不安が、依頼のハードルになっている。</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 03: 特徴 ===== -->
-<section id="features">
-  <div class="deco-circle" style="width:460px; height:460px; bottom:-140px; right:-140px;"></div>
-  <div class="container">
-    <div class="section-head">
-      <div class="section-number">SECTION_03</div>
-      <h2>PROMPT.が選ばれる理由</h2>
-      <p>デザインの専門性ではなく、AIとの伴走力で価値を出します。</p>
-    </div>
-    <div class="feature-grid">
-      <div class="feature-card">
-        <div class="feature-num">01</div>
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
-        </div>
-        <h3>AIを使い倒すから、圧倒的に速い</h3>
-        <p>最短3日で初稿を確認いただけます。通常の制作フローと比べて、大幅に時間を短縮できます。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">02</div>
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/><path d="M4 4h16v12H8l-4 4V4z"/></svg>
-        </div>
-        <h3>ヒアリングから公開まで一緒に伴走</h3>
-        <p>「何が正解かわからない」という状態から、一つずつ言語化しながら一緒に形にしていきます。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">03</div>
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6"/><path d="M20 20v-6h-6"/><path d="M5 15a9 9 0 0 0 14.4 3.4L20 20"/><path d="M19 9A9 9 0 0 0 4.6 5.6L4 4"/></svg>
-        </div>
-        <h3>修正は何度でも柔軟に</h3>
-        <p>「ここが違う」と感じたら遠慮なくご相談ください。納得いくまで一緒に調整します。</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-num">04</div>
-        <div class="feature-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3h6a2 2 0 0 1 2 2v6l-10 10-8-8L12 3z"/><circle cx="15.5" cy="8.5" r="1.3" fill="currentColor" stroke="none"/></svg>
-        </div>
-        <h3>専門デザイナーより抑えた価格帯</h3>
-        <p>AI活用による効率化を、そのまま価格に反映。まずは小さく試したい方にも選びやすい設計です。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 04: 制作フロー ===== -->
-<section class="bg-alt" id="flow">
-  <div class="dot-pattern" style="width:280px; height:280px; bottom:0; left:-60px;"></div>
-  <div class="container">
-    <div class="section-head center" style="max-width:600px;">
-      <div class="section-number" style="justify-content:center;">SECTION_04</div>
-      <h2>ご依頼から納品までの流れ</h2>
-      <div class="title-line"></div>
-    </div>
-    <div class="process-grid">
-      <div class="process-card active">
-        <div class="process-en">01 / HEARING</div>
-        <div class="process-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H8l-4 4V4z"/></svg>
-        </div>
-        <h3>ヒアリング</h3>
-        <p>ビジネス内容・ご要望・目指したい方向性を丁寧にお伺いします。</p>
-      </div>
-      <div class="process-card active">
-        <div class="process-en">02 / PROPOSAL</div>
-        <div class="process-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
-        </div>
-        <h3>提案</h3>
-        <p>参考サイトとデザインの方向性をご提案し、すり合わせます。</p>
-      </div>
-      <div class="process-card active">
-        <div class="process-en">03 / BUILD</div>
-        <div class="process-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        </div>
-        <h3>制作</h3>
-        <p>AIと共に高速でLPを生成。確認いただきながら細部を調整します。</p>
-      </div>
-      <div class="process-card active">
-        <div class="process-en">04 / DELIVER</div>
-        <div class="process-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-        </div>
-        <h3>納品</h3>
-        <p>HTML納品、ご希望に応じてFigma編集データもお渡しします。</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 05: 制作事例(ダーク) ===== -->
-<section class="section-dark" id="works">
-  <div class="deco-circle" style="width:520px; height:520px; top:-200px; right:-160px; background:radial-gradient(circle, rgba(67,56,202,0.2) 0%, transparent 70%);"></div>
-  <div class="deco-ring on-dark" style="width:260px; height:260px; bottom:-80px; left:6%;"></div>
-  <div class="container">
-    <div class="section-head">
-      <div class="section-number on-dark">SECTION_05</div>
-      <h2 style="color:var(--on-dark);">制作事例</h2>
-      <p style="color:var(--on-dark-soft);">AIとの制作プロセスを、6つの実例でご紹介します。すべて実際に公開しているサンプル作品です。</p>
-    </div>
-    <div class="works-grid">
-      <a href="https://gdrryota.github.io/form-lp/" target="_blank" rel="noopener" class="work-card">
-        <div class="work-badge">SAMPLE WORK</div>
-        <div class="work-mock" style="--mock-a:#ffffff; --mock-b:#e8433f;">
-          <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-          <div class="work-mock-body"></div>
-        </div>
-        <h3>FORM.</h3>
-        <p>パーソナルジムを想定したLP。白×黒×コーラルレッドの力強い配色と、角を斜めにカットした形状で「本気度」を表現。</p>
-        <div class="work-tags">
-          <span class="work-tag">#LP</span>
-          <span class="work-tag">#フィットネス</span>
-          <span class="work-tag">#エネルギッシュ</span>
-        </div>
-        <div class="work-link-row">form-lp.github.io <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></div>
-      </a>
-      <a href="https://gdrryota.github.io/loam-lp/" target="_blank" rel="noopener" class="work-card">
-        <div class="work-badge">SAMPLE WORK</div>
-        <div class="work-mock" style="--mock-a:#fbf7f2; --mock-b:#b5651d;">
-          <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-          <div class="work-mock-body"></div>
-        </div>
-        <h3>LOAM</h3>
-        <p>自家焙煎カフェを想定したLP。コーヒーブラウン×アンバーの暖色で、円と余白を活かした手仕事感を表現。</p>
-        <div class="work-tags">
-          <span class="work-tag">#LP</span>
-          <span class="work-tag">#飲食店</span>
-          <span class="work-tag">#ナチュラル</span>
-        </div>
-        <div class="work-link-row">loam-lp.github.io <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></div>
-      </a>
-      <a href="https://gdrryota.github.io/orbit-lp/" target="_blank" rel="noopener" class="work-card">
-        <div class="work-badge">SAMPLE WORK</div>
-        <div class="work-mock" style="--mock-a:#f7f9fc; --mock-b:#2f6fed;">
-          <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-          <div class="work-mock-body"></div>
-        </div>
-        <h3>ORBIT.</h3>
-        <p>チーム管理SaaSを想定したLP。テックブルー×ネイビーで、UIモックアップと軌道モチーフを主役に構成。</p>
-        <div class="work-tags">
-          <span class="work-tag">#LP</span>
-          <span class="work-tag">#SaaS</span>
-          <span class="work-tag">#ダークUI</span>
-        </div>
-        <div class="work-link-row">orbit-lp.github.io <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></div>
-      </a>
-      <a href="https://gdrryota.github.io/sou-lp/" target="_blank" rel="noopener" class="work-card">
-        <div class="work-badge">SAMPLE WORK</div>
-        <div class="work-mock" style="--mock-a:#faf8f3; --mock-b:#ded3c2;">
-          <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-          <div class="work-mock-body"></div>
-        </div>
-        <h3>SOU.</h3>
-        <p>生活雑貨ブランドを想定した架空案件のLP。生成り×クレイの落ち着いた配色でナチュラルな世界観を表現。</p>
-        <div class="work-tags">
-          <span class="work-tag">#LP</span>
-          <span class="work-tag">#ミニマル</span>
-          <span class="work-tag">#ECブランド</span>
-        </div>
-        <div class="work-link-row">sou-lp.github.io <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></div>
-      </a>
-      <a href="https://gdrryota.github.io/shizuku-lp/" target="_blank" rel="noopener" class="work-card">
-        <div class="work-badge">SAMPLE WORK</div>
-        <div class="work-mock" style="--mock-a:#f0fbff; --mock-b:#00c2d1;">
-          <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-          <div class="work-mock-body"></div>
-        </div>
-        <h3>SHIZUKU.</h3>
-        <p>夏季限定アイスドリンク菓子を想定したLP。水色×シアンの清涼感と、雫モチーフの丸みで親しみやすさを表現。</p>
-        <div class="work-tags">
-          <span class="work-tag">#LP</span>
-          <span class="work-tag">#食品パッケージ</span>
-          <span class="work-tag">#ポップ</span>
-        </div>
-        <div class="work-link-row">shizuku-lp.github.io <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></div>
-      </a>
-      <a href="https://gdrryota.github.io/nagi-lp/" target="_blank" rel="noopener" class="work-card">
-        <div class="work-badge">SAMPLE WORK</div>
-        <div class="work-mock" style="--mock-a:#211d16; --mock-b:#b8935a;">
-          <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span></div>
-          <div class="work-mock-body"></div>
-        </div>
-        <h3>凪 NAGI</h3>
-        <p>高級温泉旅館を想定したLP。墨色基調のダークトーンと明朝体で、余白を活かした静けさを表現。</p>
-        <div class="work-tags">
-          <span class="work-tag">#LP</span>
-          <span class="work-tag">#宿泊業</span>
-          <span class="work-tag">#ラグジュアリー</span>
-        </div>
-        <div class="work-link-row">nagi-lp.github.io <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== 06: 料金プラン ===== -->
-<section class="bg-alt" id="pricing">
-  <div class="container">
-    <div class="section-head center" style="max-width:600px;">
-      <div class="section-number" style="justify-content:center;">SECTION_06</div>
-      <h2>料金プラン</h2>
-      <p>まずは小さく試したい方から、公開までまるごとお任せしたい方まで。</p>
-    </div>
-    <div class="pricing-grid">
-      <div class="price-card">
-        <h3>ライトプラン</h3>
-        <div class="price-range">¥30,000〜</div>
-        <ul class="price-feats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>1ページLP制作</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>修正3回まで</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>HTML納品</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>対応目安 5日</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>画像自動補完対応</li>
+    <div class="grid-3">
+      <div class="pricing-card">
+        <div class="pricing-name">お試し</div>
+        <div class="pricing-price">¥0<span>/初回</span></div>
+        <div class="pricing-desc">まずは気軽に試したい方へ</div>
+        <ul class="pricing-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>初回タロット鑑定 1回無料</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>LINEで24時間相談受付</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>恋愛・仕事・対人から1テーマ</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>登録・解約いつでも無料</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>秘密厳守での鑑定</li>
         </ul>
-        <a href="mailto:gdr.ryota338@gmail.com?subject=ライトプランのご相談" class="btn btn-outline">相談してみる</a>
+        <a href="#" class="btn btn-outline" style="justify-content:center;">無料で試す</a>
       </div>
-      <div class="price-card featured">
-        <div class="price-badge">人気</div>
-        <h3>スタンダードプラン</h3>
-        <div class="price-range">¥58,000〜</div>
-        <ul class="price-feats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>1ページLP制作</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>修正回数 無制限</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>HTML + Figmaデータ納品</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>対応目安 3〜5日</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>参考サイト分析付き</li>
+      <div class="pricing-card pricing-card--featured">
+        <div class="pricing-badge">おすすめ</div>
+        <div class="pricing-name">スタンダード</div>
+        <div class="pricing-price">¥980<span>/月</span></div>
+        <div class="pricing-desc">継続して相談したい方へ</div>
+        <ul class="pricing-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>月3回までタロット鑑定</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>チャット相談し放題</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>全テーマ相談可能</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>平均返信15分の優先枠</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>いつでもプラン変更・解約可</li>
         </ul>
-        <a href="mailto:gdr.ryota338@gmail.com?subject=スタンダードプランのご相談" class="btn btn-light">相談してみる</a>
+        <a href="#" class="btn btn-light" style="justify-content:center;">このプランで始める</a>
       </div>
-      <div class="price-card">
-        <h3>フルサポートプラン</h3>
-        <div class="price-range">¥98,000〜</div>
-        <ul class="price-feats">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>複数ページ対応</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>修正回数 無制限</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>HTML + Figmaデータ納品</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>公開作業の代行</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>公開後1ヶ月サポート</li>
+      <div class="pricing-card">
+        <div class="pricing-name">プレミアム</div>
+        <div class="pricing-price">¥2,980<span>/月</span></div>
+        <div class="pricing-desc">じっくり深く視てほしい方へ</div>
+        <ul class="pricing-features">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>鑑定回数無制限</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>最優先返信(平均5分)</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>個別鑑定書のPDF送付</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>指名占い師の固定相談</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 10 18 19 7"/></svg>いつでもプラン変更・解約可</li>
         </ul>
-        <a href="mailto:gdr.ryota338@gmail.com?subject=フルサポートプランのご相談" class="btn btn-outline">相談してみる</a>
+        <a href="#" class="btn btn-outline" style="justify-content:center;">このプランで始める</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== 07: 最終CTA + FAQ ===== -->
-<section id="cta">
-  <div class="container">
-    <div class="final-cta">
-      <div class="deco-circle" style="width:420px; height:420px; top:-140px; left:-100px; background:radial-gradient(circle, rgba(67,56,202,0.25) 0%, transparent 70%);"></div>
-      <div class="deco-ring on-dark" style="width:200px; height:200px; bottom:-60px; right:8%;"></div>
-      <h2>まずは無料相談から</h2>
-      <p>どんな些細なことでも構いません。まずはお気軽にご相談ください。</p>
-      <div class="cta-group">
-        <a href="mailto:gdr.ryota338@gmail.com?subject=LP制作のご相談" class="btn btn-light">
-          無料相談を申し込む
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+<!-- ===== 最終CTA + FAQ ===== -->
+<section class="section-dark">
+  <div class="decoration-circle" style="width:480px; height:480px; top:-200px; left:-160px;"></div>
+  <div class="ring" style="width:300px; height:300px; bottom:-100px; right:-60px;"></div>
+  <div class="sparkle" style="top:10%; right:12%; font-size:20px;">✦</div>
+  <div class="sparkle" style="bottom:14%; left:8%; font-size:16px;">✧</div>
+  <div class="container" style="position:relative; z-index:1;">
+    <div class="final-cta" style="margin-bottom:88px;">
+      <span class="hero-badge">今の迷いに、答えを</span>
+      <h2>今の迷い、タロットに<br>視てもらいませんか?</h2>
+      <p>友だち追加は30秒で完了。初回のタロット鑑定は無料です。</p>
+      <div class="hero-cta-group">
+        <a href="#" class="btn btn-light" aria-label="LINE友だち追加をして無料相談を始める">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          無料でLINE友だち追加する
         </a>
-        <a href="#works" class="btn btn-outline-light">制作事例を見る</a>
+        <a href="#" class="btn btn-outline" style="color:#fff; border-color: rgba(255,255,255,0.4);" aria-label="今すぐ相談を始める">
+          今すぐ相談を始める
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
     </div>
-  </div>
-</section>
 
-<section id="faq">
-  <div class="container">
-    <div class="section-head center" style="max-width:600px;">
-      <div class="section-number" style="justify-content:center;">FAQ</div>
-      <h2>よくあるご質問</h2>
+    <div class="section-header">
+      <div class="section-number" style="justify-content:center; padding-left:0;">SECTION 07</div>
+      <h2 style="color:#fff;">よくある質問</h2>
     </div>
     <div class="faq-list">
-      <details class="faq-item">
-        <summary>制作期間はどのくらいですか?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-        <p>プランにもよりますが、初稿は最短3日でお出しできます。修正を重ねる場合はその分お時間をいただきます。</p>
-      </details>
-      <details class="faq-item">
-        <summary>修正は何回までお願いできますか?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-        <p>ライトプランは3回まで、スタンダード・フルサポートプランは回数無制限です。納得いくまでご相談ください。</p>
-      </details>
-      <details class="faq-item">
-        <summary>コーディングの知識がなくても大丈夫ですか?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-        <p>はい、問題ありません。ヒアリングから公開まで、専門知識がなくてもご依頼いただける形で進めます。</p>
-      </details>
-      <details class="faq-item">
-        <summary>途中でイメージが変わった場合、対応してもらえますか?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-        <p>もちろん対応可能です。方向性が変わった場合も、都度ご相談いただきながら調整していきます。</p>
-      </details>
-      <details class="faq-item">
-        <summary>支払い方法は?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-        <p>銀行振込に対応しています。詳細はご相談時にお伝えします。</p>
-      </details>
-      <details class="faq-item">
-        <summary>デザインの専門知識がなくても、クオリティは大丈夫ですか?<span class="faq-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></summary>
-        <p>AIが業界標準のデザインルールに沿って提案し、そこから細部まで一緒に確認しながら仕上げていきます。ご不安な点はいつでもご相談ください。</p>
-      </details>
+      <div class="faq-item">
+        <div class="faq-question"><span class="faq-badge">Q</span>本当に無料で始められますか?</div>
+        <div class="faq-answer"><span class="faq-badge">A</span>はい。LINE友だち追加と初回のタロット鑑定1回は無料でご利用いただけます。継続してご利用の場合のみ有料プランをご案内します。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="faq-badge">Q</span>占い師はどんな人が担当しますか?</div>
+        <div class="faq-answer"><span class="faq-badge">A</span>タロット鑑定歴が豊富な専任占い師が担当します。経験・実績をもとに選定した占い師のみが在籍しています。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="faq-badge">Q</span>相談内容は他の人に知られませんか?</div>
+        <div class="faq-answer"><span class="faq-badge">A</span>ご相談内容は担当占い師以外に共有されることはありません。安心してご相談ください。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="faq-badge">Q</span>返信はどれくらいで届きますか?</div>
+        <div class="faq-answer"><span class="faq-badge">A</span>平均返信時間は15分です(時間帯やプランにより変動します)。プレミアムプランでは優先的に返信いたします。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question"><span class="faq-badge">Q</span>途中でプラン解約はできますか?</div>
+        <div class="faq-answer"><span class="faq-badge">A</span>はい、いつでも解約可能です。LINEトーク上から簡単な操作で手続きが完了します。</div>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ===== Footer ===== -->
 <footer>
   <div class="container">
     <div class="footer-top">
-      <div class="logo">
-        <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><rect width="40" height="40" rx="10" fill="var(--accent)"/><text x="20" y="27" text-anchor="middle" fill="var(--on-dark)" font-size="18" font-weight="700" font-family="Space Grotesk, sans-serif">P.</text></svg>
-        PROMPT.
+      <div class="footer-logo">
+        <svg width="32" height="32" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="logoGradFooter" x1="0" y1="0" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FFB3CC"/>
+              <stop offset="1" stop-color="#FF6FA5"/>
+            </linearGradient>
+          </defs>
+          <circle cx="22" cy="22" r="22" fill="url(#logoGradFooter)"/>
+          <text x="22" y="28" text-anchor="middle" fill="#2D1B33" font-size="15" font-weight="700" font-family="'Shippori Mincho', serif">MT</text>
+        </svg>
+        <span>MIRAI TAROT</span>
       </div>
       <div class="footer-links">
-        <a href="#works">制作事例</a>
-        <a href="#pricing">料金プラン</a>
-        <a href="#faq">よくある質問</a>
+        <a href="#">利用規約</a>
+        <a href="#">プライバシーポリシー</a>
+        <a href="#">特定商取引法に基づく表記</a>
+        <a href="#">お問い合わせ</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 PROMPT. All rights reserved.</span>
-      <span>AIを活用したLP制作パートナーです。</span>
+      &copy; 2026 MIRAI TAROT. All rights reserved.
     </div>
   </div>
 </footer>
 
-<script>
-  const header = document.getElementById('header');
-  window.addEventListener('scroll', () => {
-    header.classList.toggle('scrolled', window.scrollY > 8);
-  }, { passive: true });
-</script>
 </body>
 </html>
